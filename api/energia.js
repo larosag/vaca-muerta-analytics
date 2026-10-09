@@ -19,7 +19,9 @@ export async function GET() {
     if (!start.ok) throw new Error(`Statement HTTP ${start.status}`);
     let result = await start.json();
     for (let i = 0; i < 15 && result.status?.state !== 'SUCCEEDED'; i++) {
-      if (['FAILED','CANCELED','CLOSED'].includes(result.status?.state)) throw new Error('Consulta SQL fallida');
+      if (['FAILED','CANCELED','CLOSED'].includes(result.status?.state)) throw new Error(
+  `Consulta SQL fallida: ${JSON.stringify(result.status?.error ?? result.status)}`
+);
       if (!result.statement_id) throw new Error('Falta statement_id');
       await pause(1000);
       const poll = await fetch(`${base}/api/2.0/sql/statements/${result.statement_id}`, {headers});
