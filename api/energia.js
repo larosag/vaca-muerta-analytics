@@ -1,5 +1,5 @@
-const SQL = `SELECT anio, mes, barriles_por_dia, participacion_pct, variacion_mom_pct, variacion_yoy_pct FROM energia.upstream.vw_vaca_muerta_kpis ORDER BY anio DESC, mes DESC LIMIT 36`;
-const KEYS = ['anio','mes','barriles_por_dia','participacion_pct','variacion_mom_pct','variacion_yoy_pct'];
+const SQL = `SELECT anio, mes, barriles_por_dia, variacion_mom_pct, variacion_yoy_pct FROM energia.upstream.vw_vaca_muerta_kpis ORDER BY anio DESC, mes DESC LIMIT 36`;
+const KEYS = ['anio','mes','barriles_por_dia','variacion_mom_pct','variacion_yoy_pct'];
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export async function GET() {
