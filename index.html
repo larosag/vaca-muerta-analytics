@@ -633,7 +633,7 @@
       const narrow = matchMedia('(max-width: 900px)');
       const yearValue = $('year-value'), prev = $('year-prev'), next = $('year-next');
       const fmt = new Intl.NumberFormat('es-AR');
-      const pct = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+      const pct = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       const value = (y, m) => (DATA[y] ? DATA[y][m] : null) ?? null;
