@@ -16,8 +16,11 @@ export async function GET() {
       method:'POST', headers,
       body:JSON.stringify({warehouse_id:warehouse, statement:SQL, wait_timeout:'10s', disposition:'INLINE', format:'JSON_ARRAY'})
     });
-    if (!start.ok) throw new Error(`Statement HTTP ${start.status}`);
-    let result = await start.json();
+if (!start.ok) {
+  const detalle = await start.text();
+  console.error("Respuesta exacta de Databricks:", detalle);
+  throw new Error(`Statement HTTP ${start.status}`);
+}    let result = await start.json();
     for (let i = 0; i < 15 && result.status?.state !== 'SUCCEEDED'; i++) {
       if (['FAILED','CANCELED','CLOSED'].includes(result.status?.state)) throw new Error(
   `Consulta SQL fallida: ${JSON.stringify(result.status?.error ?? result.status)}`
